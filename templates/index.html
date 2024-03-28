@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Klimatyzacja pomieszczenia</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"/>
+    <link href="http://fonts.googleapis.com/css?family=Lato|Josefin+Sans&subset=latin,latin-ext" rel="stylesheet" type="text/css"/>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+
+</head>
+<body>
+<div id="container">
+    <div class="rectangle">
+        <div id="logo">
+            <h2 style="letter-spacing: 8px">SYSTEM KLIMATYZACJI POMIESZCZENIA</h2>
+            analiza modelu matematycznego,
+            zastosowanie regulatora typu PI
+        </div><br>
+        <div id="download">
+            [POBIERZ KARTĘ PROJEKTU]
+        </div>
+    </div>
+    <div class="rectangle" style="background-color: #A3C3D9">
+        <div class="chart" id="wykres1">
+            <script>
+                var graphs = {{plot1 | safe}};
+                Plotly.plot('wykres1',graphs,{});
+            </script>
+        </div>
+        <div id="parameters">
+            DOSTOSUJ PARAMETRY:<br>
+            <form method="POST">
+                <input type="number" placeholder="Enter tsim" name="tsim" step="1" value="{{ TSIM }}">
+                Czas symulacji <br>
+                Cel: <br>
+                <input type="number" placeholder="Enter T_aktualna" name="Ta" step="0.5" value="{{ TA }}">
+                Temperatura aktualna <br>
+                <input type="number" placeholder="Enter Tzad" name="Tzad" step="0.5" value="{{ TZAD }}">
+                Temperatura zadana  <br>
+                Fizyka pokoju: <br>
+                <input type="number" placeholder="Enter T_otoczenia" name="To" step="0.5" value="{{ TO }}">
+                Temperatura otoczenia  <br>
+                <input type="number" placeholder="Enter x" name="x" step="0.5" value="{{ X }}">
+                Długośc pokoju  <br>
+                <input type="number" placeholder="Enter y" name="y" step="0.5" value="{{ Y }}">
+                Szerokość pokoju  <br>
+                <input type="number" placeholder="Enter z" name="z" step="0.5" value="{{ Z }}">
+                Wysokość pokoju  <br>
+                <input type="number" placeholder="Enter d" name="d" step="0.01" value="{{ D }}">
+                Grubość ściany  <br>
+                <input type="number" placeholder="Enter p" name="p" step="1" value="{{ P }}">
+                Gęstość materialu budowlanego <br>
+                <input type="number" placeholder="Enter Q" name="Q" step="0.01" value="{{ Q }}">
+                Przewodność cieplna mat. bud.  <br>
+                <input type="number" placeholder="Enter Ci" name="Ci" step="1" value="{{ CI }}">
+                Ciepło właście powietrza  <br>
+                <input type="number" placeholder="Enter Pmax" name="Pmax" step="1" value="{{ PMAX }}">
+                Maksymalna moc grzałki  <br>
+                Właściwości regulatora: <br>
+                <input type="number" placeholder="Enter tp" name="tp" step="0.1" value="{{ TP }}">
+                Czas próbkowania  <br>
+                <input type="number" placeholder="Enter ti" name="ti" step="0.1" value="{{ TI }}">
+                Czas zdwojenia <br>
+                <input type="number" placeholder="Enter Kp" name="Kp" step="0.01" value="{{ KP }}">
+                Wzmocnienie regulatora  <br>
+                <input type="submit" value="Submit values">
+            </form>
+        </div>
+        <div class="chart" id="wykres2">
+            <script>
+                var graphs = {{plot2 | safe}};
+                Plotly.plot('wykres2',graphs,{});
+            </script>
+        </div>
+        <div class="chart" id="wykres3">
+            <script>
+                var graphs = {{plot3 | safe}};
+                Plotly.plot('wykres3',graphs,{});
+            </script>
+        </div>
+        <div class="chart" id="wykres4">
+            <script>
+                var graphs = {{plot4 | safe}};
+                Plotly.plot('wykres4',graphs,{});
+            </script>
+        </div>
+    </div>
+</div>
+</body>
+</html>
